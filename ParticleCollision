@@ -1,0 +1,27 @@
+from qiskit import QuantumCircuit, Aer, transpile
+from qiskit.visualization import plot_histogram
+from qiskit.providers.aer import AerSimulator
+
+# Creazione di un circuito quantistico con 2 qubit e 2 bit classici
+qc = QuantumCircuit(2, 2)
+
+# Preparazione degli stati iniziali dei qubit (ad esempio, mettiamo il primo qubit nello stato |1⟩)
+qc.x(0)
+
+# Simulazione della "collisione" o interazione tra i due qubit utilizzando la porta CNOT
+qc.cx(0, 1)
+
+# Misura entrambi i qubit
+qc.measure([0,1], [0,1])
+
+# Visualizzazione del circuito
+qc.draw('mpl')
+
+# Simulazione del circuito
+simulator = AerSimulator()
+compiled_circuit = transpile(qc, simulator)
+result = simulator.run(compiled_circuit).result()
+
+# Visualizzazione dei risultati
+counts = result.get_counts()
+plot_histogram(counts)
