@@ -1,0 +1,30 @@
+from qiskit import QuantumCircuit, Aer, transpile
+from qiskit.visualization import plot_histogram
+from qiskit.providers.aer import AerSimulator
+
+# Creazione di un circuito quantistico con 1 qubit e 1 bit classico
+qc = QuantumCircuit(1, 1)
+
+# Applica la porta Hadamard per creare una sovrapposizione (simulando le due fenditure)
+qc.h(0)
+
+# Applica una porta di fase per introdurre un cambiamento di fase (simulando l'interferenza)
+qc.u1(0.3, 0)  # U1 è una porta di fase generica
+
+# Applica nuovamente la porta Hadamard
+qc.h(0)
+
+# Misura il qubit
+qc.measure(0, 0)
+
+# Visualizzazione del circuito
+qc.draw('mpl')
+
+# Simulazione del circuito
+simulator = AerSimulator()
+compiled_circuit = transpile(qc, simulator)
+result = simulator.run(compiled_circuit).result()
+
+# Visualizzazione dei risultati
+counts = result.get_counts()
+plot_histogram(counts)
