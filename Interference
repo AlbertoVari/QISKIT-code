@@ -1,0 +1,33 @@
+# Importazione delle librerie necessarie
+from qiskit import QuantumCircuit, Aer, transpile
+from qiskit.visualization import plot_histogram
+from qiskit.providers.aer import AerSimulator
+
+# Creazione di un circuito quantistico con 2 qubit
+qc = QuantumCircuit(2)
+
+# Applicazione della porta Hadamard ai due qubit
+qc.h(0)
+qc.h(1)
+
+# Applicazione di una porta X (NOT) al primo qubit
+qc.x(0)
+
+# Applicazione di una seconda porta Hadamard ai due qubit
+qc.h(0)
+qc.h(1)
+
+# Misurazione dei qubit
+qc.measure_all()
+
+# Visualizzazione del circuito
+qc.draw('mpl')
+
+# Simulazione del circuito
+simulator = AerSimulator()
+compiled_circuit = transpile(qc, simulator)
+result = simulator.run(compiled_circuit).result()
+
+# Visualizzazione dei risultati
+counts = result.get_counts()
+plot_histogram(counts)
