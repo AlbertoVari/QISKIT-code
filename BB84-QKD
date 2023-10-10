@@ -1,0 +1,42 @@
+from qiskit import QuantumCircuit, Aer, transpile
+from qiskit.providers.aer import AerSimulator
+from random import choice
+
+# Numero di qubit (o bit della chiave)
+n = 10
+
+# Passo 1: Alice genera bit casuali e basi casuali
+alice_bits = [choice([0, 1]) for _ in range(n)]
+alice_bases = [choice(['Z', 'X']) for _ in range(n)]
+
+# Passo 2: Alice prepara i qubit in base ai suoi bit e basi
+alice_qc = QuantumCircuit(n)
+for i in range(n):
+    if alice_bits[i]:
+        alice_qc.x(i)
+    if alice_bases[i] == 'X':
+        alice_qc.h(i)
+alice_qc.barrier()
+
+# Passo 3: Bob sceglie basi casuali per la misurazione
+bob_bases = [choice(['Z', 'X']) for _ in range(n)]
+bob_qc = QuantumCircuit(n, n)
+bob_qc += alice_qc
+for i in range(n):
+    if bob_bases[i] == 'X':
+        bob_qc.h(i)
+bob_qc.measure(range(n), range(n))
+
+# Simulazione
+simulator = AerSimulator()
+compiled_circuit = transpile(bob_qc, simulator)
+result = simulator.run(compiled_circuit).result()
+bob_results = list(result.get_counts().keys())[0]
+
+# Passo 4: Alice e Bob condividono le basi e mantengono i bit dove le basi coincidono
+key = ''
+for i in range(n):
+    if alice_bases[i] == bob_bases[i]:
+        key += bob_results[i]
+
+print("Chiave generata:", key)
