@@ -1,0 +1,28 @@
+# Importazione delle librerie necessarie
+from qiskit import QuantumCircuit, Aer, transpile
+from qiskit.visualization import plot_histogram
+from qiskit.providers.aer import AerSimulator
+
+# Creazione di un circuito quantistico con 2 qubit
+qc = QuantumCircuit(2)
+
+# Applica la porta Hadamard al primo qubit per creare una sovrapposizione
+qc.h(0)
+
+# Applica una porta CNOT con il primo qubit come controllo e il secondo come target
+qc.cx(0, 1)
+
+# Misura entrambi i qubit nella base computazionale
+qc.measure_all()
+
+# Visualizzazione del circuito
+qc.draw('mpl')
+
+# Simulazione del circuito
+simulator = AerSimulator()
+compiled_circuit = transpile(qc, simulator)
+result = simulator.run(compiled_circuit).result()
+
+# Visualizzazione dei risultati
+counts = result.get_counts()
+plot_histogram(counts)
