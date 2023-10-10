@@ -1,0 +1,40 @@
+from qiskit import QuantumCircuit, Aer, transpile
+from qiskit.visualization import plot_histogram
+from qiskit.providers.aer import AerSimulator
+
+# Creazione di un circuito quantistico con 3 qubit e 2 bit classici
+qc = QuantumCircuit(3, 2)
+
+# Passo 1: Preparazione dello stato da teletrasportare (ad esempio, |1⟩)
+qc.x(0)
+qc.barrier()
+
+# Passo 2: Creazione di uno stato entangled tra il qubit 1 e il qubit 2
+qc.h(1)
+qc.cx(1, 2)
+qc.barrier()
+
+# Passo 3: Applicazione delle porte necessarie per il teletrasporto
+qc.cx(0, 1)
+qc.h(0)
+qc.barrier()
+
+# Passo 4: Misura i primi due qubit
+qc.measure([0,1], [0,1])
+qc.barrier()
+
+# Passo 5: Applicazione delle porte condizionali sul qubit ricevente
+qc.cx(1, 2)
+qc.cz(0, 2)
+
+# Visualizzazione del circuito
+qc.draw('mpl')
+
+# Simulazione del circuito
+simulator = AerSimulator()
+compiled_circuit = transpile(qc, simulator)
+result = simulator.run(compiled_circuit).result()
+
+# Visualizzazione dei risultati
+counts = result.get_counts()
+plot_histogram(counts)
