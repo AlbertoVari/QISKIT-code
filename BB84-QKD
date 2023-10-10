@@ -21,7 +21,7 @@ alice_qc.barrier()
 # Passo 3: Bob sceglie basi casuali per la misurazione
 bob_bases = [choice(['Z', 'X']) for _ in range(n)]
 bob_qc = QuantumCircuit(n, n)
-bob_qc += alice_qc
+bob_qc &= alice_qc
 for i in range(n):
     if bob_bases[i] == 'X':
         bob_qc.h(i)
