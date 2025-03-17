@@ -46,5 +46,5 @@ Each program serves as a practical example of quantum computing principles, offe
 - Paddle Quantum is a quantum computing framework developed by Baidu as an extension of the PaddlePaddle deep learning platform, designed for research and applications in quantum machine learning, quantum chemistry, and quantum optimization (https://github.com/AlbertoVari/Quantum)
 
 - Quantum TSP contains code for an open source program solving the Travelling Salesman Problem with Quantum Computing (https://github.com/AlbertoVari/quantum_tsp)
--
+
 
