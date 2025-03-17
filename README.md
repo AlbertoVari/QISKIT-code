@@ -4,7 +4,7 @@ The repository [QISKIT-code](https://github.com/AlbertoVari/QISKIT-code) contain
 
 1. **BB84-QKD**: This program demonstrates the BB84 quantum key distribution protocol, one of the first and most well-known quantum cryptography protocols. It showcases how two parties can securely share a cryptographic key using the principles of quantum mechanics.
 
-2. **BlackHole-Evaporation**: Simulates the concept of black hole evaporation, possibly exploring Hawking radiation and the gradual loss of mass and energy from black holes over time.
+2. **BlackHole-Evaporation**: Simulates the concept of black hole evaporation, possibly exploring Hawking radiation and the gradual loss of mass and energy from black holes over time. based preprint https://arxiv.org/pdf/2412.15180
 
 3. **Entanglement**: Illustrates the phenomenon of quantum entanglement, where two or more qubits become linked such that the state of one instantaneously influences the state of the other, regardless of distance.
 
