@@ -1,1 +1,54 @@
+from qiskit import QuantumCircuit, Aer, transpile, execute
+from qiskit.visualization import plot_histogram
+import numpy as np
+
+def haar_random_unitary(num_qubits):
+    """Creates a Haar-random unitary circuit to model scrambling dynamics."""
+    qc = QuantumCircuit(num_qubits)
+    
+    for i in range(num_qubits - 1):
+        qc.h(i)
+        qc.cx(i, i + 1)
+    
+    for i in range(num_qubits):
+        theta = np.random.uniform(0, 2 * np.pi)
+        qc.rx(theta, i)
+        qc.ry(theta, i)
+    
+    return qc
+
+def black_hole_evaporation(num_qubits):
+    """Simulates the black hole evaporation process."""
+    qc = QuantumCircuit(num_qubits, num_qubits)
+    
+    # Step 1: Prepare maximally entangled black hole state
+    for i in range(num_qubits // 2):
+        qc.h(i)
+        qc.cx(i, i + num_qubits // 2)
+    
+    # Step 2: Apply Haar random scrambling dynamics
+    haar_circuit = haar_random_unitary(num_qubits)
+    qc.compose(haar_circuit, inplace=True)
+    
+    # Step 3: Simulate Hawking radiation by gradually measuring qubits
+    for i in range(num_qubits // 2):
+        qc.measure(i, i)
+    
+    return qc
+
+# Number of qubits representing the black hole
+num_qubits = 6  # Example: Small black hole simulation
+
+# Create and visualize the quantum circuit
+black_hole_qc = black_hole_evaporation(num_qubits)
+black_hole_qc.draw()
+
+# Run the simulation
+backend = Aer.get_backend('qasm_simulator')
+compiled_circuit = transpile(black_hole_qc, backend)
+result = execute(compiled_circuit, backend, shots=1024).result()
+counts = result.get_counts()
+
+# Display the measurement results
+plot_histogram(counts)
 
