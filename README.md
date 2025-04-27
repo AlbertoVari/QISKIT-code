@@ -24,6 +24,8 @@ The repository [QISKIT-code](https://github.com/AlbertoVari/QISKIT-code) contain
 
 11. **grover.py**: Implements Grover's algorithm, a quantum search algorithm that provides a quadratic speedup for unstructured search problems compared to classical algorithms.
 
+12. **quantum-qudit-crack.py**: Simulates a quantum brute-force password attack using Grover's algorithm, extended to qudits (d-dimensional quantum systems) instead of normal qubits. It operates in a hybrid quantum-classical way and also logs memory usage and execution time.
+
 Each program serves as a practical example of quantum computing principles, offering insights into both foundational concepts and advanced quantum algorithms. 
 
 
