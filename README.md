@@ -26,7 +26,24 @@ The repository [QISKIT-code](https://github.com/AlbertoVari/QISKIT-code) contain
 
 12. **quantum-qudit-crack.py**: Simulates a quantum brute-force password attack using Grover's algorithm, extended to qudits (d-dimensional quantum systems) instead of normal qubits. It operates in a hybrid quantum-classical way and also logs memory usage and execution time.
 
+13. **Vqnn_Gradient_Attack.py** : Based on article "A Numerical Gradient Inversion Attack in Variational Quantum Neural-Networks" https://arxiv.org/pdf/2504.12806 the setting for running the code are
+
+    Parameter  | Recommended Value | Why
+    lr         | 0.005             | Smoother and stable descent
+    h          | 0.0005            | Precise gradient estimation
+    n_steps    | 500               | Allow time for convergence
+    avg_window | 15                | Stronger low-pass filtering
+    use_kalman | True              | Faster convergence
+
+This Python script using PennyLane demonstrates numerical inversion of a VQNN input based solely on model gradients defining : 
+a) A simple 2-qubit VQNN.
+b) An attack that reconstructs hidden input data by matching gradients using a finite-difference method and adaptive filtering.
+c) An optional Kalman filter refinement to speed up convergence.
+--- Output:
+Prints the true input, reconstructed input, and Mean Squared Error (MSE) between them — showing if the attack was successful.
+
 Each program serves as a practical example of quantum computing principles, offering insights into both foundational concepts and advanced quantum algorithms. 
+
 
 
 ## Related repositories
