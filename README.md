@@ -44,6 +44,7 @@ Prints the true input, reconstructed input, and Mean Squared Error (MSE) between
 
 Each program serves as a practical example of quantum computing principles, offering insights into both foundational concepts and advanced quantum algorithms. 
 
+14. **QML-fraud-detection-demo.py** : The demo builds a hybrid quantum-classical classifier that embeds 2D input features into a quantum circuit using angle embedding, then uses a trainable variational circuit to classify fraud vs. non-fraud transactions based on measurement outcomes.  Install Requirements -> pip install pennylane scikit-learn matplotlib
 
 
 ## Related repositories
