@@ -46,6 +46,9 @@ Each program serves as a practical example of quantum computing principles, offe
 
 14. **QML-fraud-detection-demo.py** : The demo builds a hybrid quantum-classical classifier that embeds 2D input features into a quantum circuit using angle embedding, then uses a trainable variational circuit to classify fraud vs. non-fraud transactions based on measurement outcomes.  Install Requirements -> pip install pennylane scikit-learn matplotlib
 
+15. **PQC-ML-KEM-Windows11.py** : This Python script demonstrates how to use the Windows CNG (Cryptography Next Generation) API via the bcrypt.dll library to: a) Open the ML-KEM algorithm provider. b) Generate a key pair. c) Export the public key.
+because Post-Quantum Cryptography Comes to Windows Insiders and Linux https://techcommunity.microsoft.com/blog/microsoft-security-blog/post-quantum-cryptography-comes-to-windows-insiders-and-linux/4413803 using Cryptography API: Next Generation (CNG) https://learn.microsoft.com/en-us/windows/win32/seccng/cng-portal
+
 
 ## Related repositories
 
